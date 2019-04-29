@@ -1,10 +1,56 @@
 # scan2deploy-android
 
-Scan2Deploy application for Android. For high-level usage information, conslut the `Scan2Deploy` section of the [DXU manual](https://datalogic.github.io/dxu/scan2deploy).
+`Scan2Deploy` is an application devoted to the initial staging of Android devices by reading a barcode sequence. Depending on the content of the staging barcodes `Scan2Deploy` will, in this order:
+
+* configure the device Wi-Fi network,
+* control some device inner system settings (e.g. the lock-screen enabled state),
+* download a data archive from a HTTP/HTTPS server and unpack it to the device,
+* install/update applications and the system image, and
+* run a customary script (to perform any additional setup).
+
+It's worth noticing that the application is *not* a resident service. The above-mentioned actions are performed as long as `Scan2Deploy` is active and in use.
+
+## Creating Scan2Deploy files
+
+You will need to create your Scan2Deploy JSON files using a text editor. A JSON schemas is available to help ensure valid file content. There are several advantages to using an editor that supports this schema:
+
+* Provides help text for each field
+
+* Provides real-time compiler-like messages letting you know when you have made a mistake
+
+* Allows you to write files faster and with fewer mistakes
+
+### Choosing an editor
+
+There are several good JSON editors available. We reccommend [Visual Studio Code](https://code.visualstudio.com/). It is free and has [many features designed to make writing JSON files easier](https://code.visualstudio.com/docs/languages/json), including utilizing JSON schemas.
+
+Visual Studio and Visual Studio Code can be configured to use JSON schemas by including the `$schema` tag in you JSON file:
+
+```json
+{
+    "$schema": "http://json.schemastore.org/datalogic-scan2deploy-android"
+}
+```
+
+Some other editors know to use the schema files on schemastore.org when a given file uses a specific file extension that is registered on schemastore.org:  `file-name.dla.json`
+
+### Barcode Generation
+
+Scan2Deploy barcodes are generated with the `Scan2Deploy` UI inside DXU Desktop. From the main *Device Configuration Utility* page, click the *Scan2Deploy (Beta)* button:
+
+![Scan2Deploy button](./media/image81.png)
+
+Once you are at the Scan2Deploy UI page, you can browse to the JSON file you have created and then click `Generate PDF`.
+
+![Scan2Deploy button](./media/image82.png)
+
+A PDF page will open up in your default PDF viewer, ready for you to print, save, or scan.
+
+![Scan2Deploy button](./media/image83.png)
 
 ## File structure
 
-In order to describe the JSON input-file structure used for Android devices, we start off by picking an example template file containing all the available parameters, as follows
+In order to describe the JSON input-file structure used for Scan2Deploy Android, we start off by picking an example template file containing all the available parameters, as follows
 
 ```json
 {
