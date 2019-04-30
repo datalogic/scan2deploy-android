@@ -14,6 +14,8 @@ It's worth noticing that the application is *not* a resident service. The above-
 
 Scan2Deploy is pre-installed on Android devices. However, if you want to use the latest version instead, you can create a custom Android Enterprise enrollment barcode that pulls a new version from Github (or another location of your choosing). The list of valid fields you can choose from are [documented here](https://developers.google.com/android/work/play/emm-api/prov-devices#create_a_qr_code).  Here's a baseline sample configuration you can use:
 
+### JSON
+
 ```json
 {
     "android.app.extra.PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME": "com.datalogic.scan2deploy/com.datalogic.scan2deploy.DeviceOwnerReceiver",
@@ -25,6 +27,11 @@ Scan2Deploy is pre-installed on Android devices. However, if you want to use the
     "android.app.extra.PROVISIONING_WIFI_SECURITY_TYPE": "NONE"
 }
 ```
+
+### QR Code
+
+![Scan2Deploy v1.9](media/scan2deploy1-9.gif)
+
 
 There are several tools you can use to encode your JSON data into a QR code. A few options are provided below.
 
