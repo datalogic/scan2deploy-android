@@ -12,7 +12,12 @@ It's worth noticing that the application is *not* a resident service. The above-
 
 ## Using the latest Scan2Deploy
 
-Scan2Deploy is pre-installed on Android devices. However, if you want to use the latest version instead, you can create a custom Android Enterprise enrollment barcode that pulls a new version from Github (or another location of your choosing). The list of valid fields you can choose from are [documented here](https://developers.google.com/android/work/play/emm-api/prov-devices#create_a_qr_code).  Here's a baseline sample configuration you can use:
+Scan2Deploy is pre-installed on Android devices. However, if you want to use the latest version instead, you can create a custom Android Enterprise enrollment barcode that pulls a new version from Github (or another location of your choosing). The list of valid fields you can choose from are [documented here](https://developers.google.com/android/work/play/emm-api/prov-devices#create_a_qr_code).  A sample configuration and pre-generated barcode are provided below.
+
+There are several tools you can use to encode your JSON data into a QR code. A few options are provided below.
+
+* [qrencode](https://fukuchi.org/works/qrencode/index.html.en) - Linux command line utility. Example usage: `qrencode -o s2dupdate.png < s2dupdate.json`
+* [QR Code Generator](https://kazuhikoarase.github.io/qrcode-generator/js/demo/) - online tool suitable for copy-paste of JSON data.
 
 ### JSON
 
@@ -31,12 +36,6 @@ Scan2Deploy is pre-installed on Android devices. However, if you want to use the
 ### QR Code
 
 ![Scan2Deploy v1.9](media/scan2deploy1-9.gif)
-
-
-There are several tools you can use to encode your JSON data into a QR code. A few options are provided below.
-
-* [qrencode](https://fukuchi.org/works/qrencode/index.html.en) - Linux command line utility. Example usage: `qrencode -o s2dupdate.png < s2dupdate.json`
-* [QR Code Generator](https://kazuhikoarase.github.io/qrcode-generator/js/demo/) - online tool suitable for copy-paste of JSON data.
 
 ## Creating Scan2Deploy files
 
