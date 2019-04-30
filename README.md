@@ -10,14 +10,33 @@
 
 It's worth noticing that the application is *not* a resident service. The above-mentioned actions are performed as long as `Scan2Deploy` is active and in use.
 
+## Using the latest Scan2Deploy
+
+Scan2Deploy is pre-installed on Android devices. However, if you want to use the latest version instead, you can create a custom Android Enterprise enrollment barcode that pulls a new version from Github (or another location of your choosing). The list of valid fields you can choose from are [documented here](https://developers.google.com/android/work/play/emm-api/prov-devices#create_a_qr_code).  Here's a baseline sample configuration you can use:
+
+```json
+{
+    "android.app.extra.PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME": "com.datalogic.scan2deploy/com.datalogic.scan2deploy.DeviceOwnerReceiver",
+    "android.app.extra.PROVISIONING_LEAVE_ALL_SYSTEM_APPS_ENABLED": true,
+    "android.app.extra.PROVISIONING_SKIP_ENCRYPTION": true,
+    "android.app.extra.PROVISIONING_DEVICE_ADMIN_SIGNATURE_CHECKSUM": "6CG8ls-pzlKcJNeoZtAC-neobD_ypZCI853n_TBGEHI=",
+    "android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION": "https://github.com/datalogic/scan2deploy-android/releases/download/v1.9/Scan2Deploy.apk",
+    "android.app.extra.PROVISIONING_WIFI_SSID": "myWifi",
+    "android.app.extra.PROVISIONING_WIFI_SECURITY_TYPE": "NONE"
+}
+```
+
+There are several tools you can use to encode your JSON data into a QR code. A few options are provided below.
+
+* [qrencode](https://fukuchi.org/works/qrencode/index.html.en) - Linux command line utility. Example usage: `qrencode -o s2dupdate.png < s2dupdate.json`
+* [QR Code Generator](https://kazuhikoarase.github.io/qrcode-generator/js/demo/) - online tool suitable for copy-paste of JSON data.
+
 ## Creating Scan2Deploy files
 
 You will need to create your Scan2Deploy JSON files using a text editor. A JSON schemas is available to help ensure valid file content. There are several advantages to using an editor that supports this schema:
 
 * Provides help text for each field
-
 * Provides real-time compiler-like messages letting you know when you have made a mistake
-
 * Allows you to write files faster and with fewer mistakes
 
 ### Choosing an editor
@@ -263,3 +282,26 @@ Some (the most useful) of the supported commands are the following:
 * `UNINSTALL <package-name>`: Uninstalls a previously installed application given its `package-name`.
 * `UPDATE <ota-path> <reset-type> <force-update>`: Installs a firmware update from an OTA package.
 * `WAIT <milliseconds>`: Suspend the script execution for `milliseconds` milliseconds.
+
+## Example usage
+
+The following example will update the Datalogic tools on the device to the following versions:
+
+* DXU Agent 1.20.168
+* SoftSpot 1.8.92
+
+```json
+{
+    "$schema": "http://json.schemastore.org/datalogic-scan2deploy-android",
+    "global": {
+        "auto-scan": true,
+        "target-path": "/sdcard/Download/"
+    },
+    "deployment": {
+        "scheme": "https",
+        "host": "github.com",
+        "port": 443,
+        "path": "/datalogic/sandbox/raw/master/demo.zip"
+    }
+}
+```
