@@ -19,7 +19,9 @@ There are several tools you can use to encode your JSON data into a QR code. A f
 * [qrencode](https://fukuchi.org/works/qrencode/index.html.en) - Linux command line utility. Example usage: `qrencode -o s2dupdate.png < s2dupdate.json`
 * [QR Code Generator](https://kazuhikoarase.github.io/qrcode-generator/js/demo/) - online tool suitable for copy-paste of JSON data.
 
-### JSON
+### Latest version
+
+#### JSON
 
 ```json
 {
@@ -27,15 +29,34 @@ There are several tools you can use to encode your JSON data into a QR code. A f
     "android.app.extra.PROVISIONING_LEAVE_ALL_SYSTEM_APPS_ENABLED": true,
     "android.app.extra.PROVISIONING_SKIP_ENCRYPTION": true,
     "android.app.extra.PROVISIONING_DEVICE_ADMIN_SIGNATURE_CHECKSUM": "6CG8ls-pzlKcJNeoZtAC-neobD_ypZCI853n_TBGEHI=",
-    "android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION": "https://github.com/datalogic/scan2deploy-android/releases/download/v1.9/Scan2Deploy.apk",
-    "android.app.extra.PROVISIONING_WIFI_SSID": "myWifi",
-    "android.app.extra.PROVISIONING_WIFI_SECURITY_TYPE": "NONE"
+    "android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION": "https://github.com/datalogic/scan2deploy-android/raw/master/Scan2Deploy.apk"
 }
 ```
 
-### QR Code
+#### QR Code
+
+![Scan2Deploy v1.9](media/scan2deploy-master.gif)
+
+### Specific version
+
+You can also download a specific release of Scan2Deploy. For example, here is the process for using version `1.9`:
+
+#### JSON
+
+```json
+{
+    "android.app.extra.PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME": "com.datalogic.scan2deploy/com.datalogic.scan2deploy.DeviceOwnerReceiver",
+    "android.app.extra.PROVISIONING_LEAVE_ALL_SYSTEM_APPS_ENABLED": true,
+    "android.app.extra.PROVISIONING_SKIP_ENCRYPTION": true,
+    "android.app.extra.PROVISIONING_DEVICE_ADMIN_SIGNATURE_CHECKSUM": "6CG8ls-pzlKcJNeoZtAC-neobD_ypZCI853n_TBGEHI=",
+    "android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION": "https://github.com/datalogic/scan2deploy-android/raw/v1.9/Scan2Deploy.apk"
+}
+```
+
+#### QR Code
 
 ![Scan2Deploy v1.9](media/scan2deploy1-9.gif)
+
 
 ## Creating Scan2Deploy files
 
