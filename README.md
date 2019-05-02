@@ -19,9 +19,9 @@ There are several tools you can use to encode your JSON data into a QR code. A f
 * [qrencode](https://fukuchi.org/works/qrencode/index.html.en) - Linux command line utility. Example usage: `qrencode -o s2dupdate.png < s2dupdate.json`
 * [QR Code Generator](https://kazuhikoarase.github.io/qrcode-generator/js/demo/) - online tool suitable for copy-paste of JSON data.
 
-### Latest version
+### Installing the latest version of Scan2Deploy
 
-#### JSON
+#### JSON (Latest version)
 
 ```json
 {
@@ -33,15 +33,15 @@ There are several tools you can use to encode your JSON data into a QR code. A f
 }
 ```
 
-#### QR Code
+#### QR Code (Latest version)
 
 ![Scan2Deploy v1.9](media/scan2deploy-master.gif)
 
-### Specific version
+### Installing a specific version of Scan2Deploy
 
 You can also download a specific release of Scan2Deploy. For example, here is the process for using version `1.9`:
 
-#### JSON
+#### JSON (Version 1.9)
 
 ```json
 {
@@ -53,7 +53,7 @@ You can also download a specific release of Scan2Deploy. For example, here is th
 }
 ```
 
-#### QR Code
+#### QR Code (Version 1.9)
 
 ![Scan2Deploy v1.9](media/scan2deploy1-9.gif)
 
