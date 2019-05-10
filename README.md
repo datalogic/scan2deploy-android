@@ -119,7 +119,11 @@ In order to describe the JSON input-file structure used for Scan2Deploy Android,
         "auto-scan": true,
         "script": "setup.s",
         "action": "close",
-        "backup-to-enterprise": true
+        "backup-to-enterprise": true,
+        "script": [
+            "[Post-Install]",
+            "DISABLE_APP com.android.chrome"
+        ]
     },
     "settings": {
         "date-time": "Thu, 19 Apr 2018 07:51:37 GMT",
@@ -294,21 +298,98 @@ As a sidenote, when launched from intent it could be beneficial to specify the g
 
 ### Scripting Language
 
-During the staging finalization phase, the application can be instructed to interpret and run a custom script, enabling it to perform additional post-staging procedures.
+During the staging finalization phase, the application can be instructed to interpret and run a custom script, enabling it to perform additional post-staging procedures. The language structure is a simple one-statement-per-line sequence, executed in order. The supported commands are the following:
 
-The language structure is a simple one-statement-per-line sequence, executed in order.
+#### DELETE
 
-Some (the most useful) of the supported commands are the following:
+```bash
+DELETE <path> <pattern> <include>
+```
 
-* `DELETE <path> <pattern> <include>`: Recursively deletes files/folders starting from `path`, only if the name matches the `pattern` regular-expression. If `include` is `true` the matching entries will be deleted, the non-matching otherwise. If folder `path` is empty at the end of the process it will be deleted, as well.
-* `GRANT <package-name>`: Grants all the permissions declared in the manifest for an application given its `package-name`.
-* `INFLATE <archive-path> <target-path>`: Inflates the ZIP archive found at `archive-path` to `target-path` folder.
-* `INSTALL <apk-path>`: Installs an application given the path to the containing APK.
-* `LAUNCH <package-name>`: Starts the launching intent given an application `package-name`.
-* `SHELL <command-with-arguments>`: Runs an arbitrary shell command, similarly to the `ADB shell` command.
-* `UNINSTALL <package-name>`: Uninstalls a previously installed application given its `package-name`.
-* `UPDATE <ota-path> <reset-type> <force-update>`: Installs a firmware update from an OTA package.
-* `WAIT <milliseconds>`: Suspend the script execution for `milliseconds` milliseconds.
+Recursively deletes files/folders starting from `path`, only if the name matches the `pattern` regular-expression. If `include` is `true` the matching entries will be deleted, the non-matching otherwise. If folder `path` is empty at the end of the process it will be deleted, as well.
+
+#### DISABLE_APP
+
+```bash
+DISABLE_APP <package-name>
+```
+
+Disables the app with the specified `package-name`. There is no longer any way an user could launch the app.
+
+#### ENABLE_APP
+
+```bash
+ENABLE_APP <package-name>
+```
+
+Enable the app with the specified `package-name`. The app becomes user-launchable.
+
+#### GRANT
+
+```bash
+GRANT [-p permission] [-s grant|deny|default] <package-name>
+```
+
+Grants or revokes permissions on the specified package. The `-p` and `-s` parameters are optional. 
+
+* `[-p]` If a permission is provided using the `-p` parameter, only that single permission will be affected. If no `-p` is specified, all the permissions declared in the manifest for the given `package-name` package will be affected.
+* `[-s]` The `-s` paramter can be used to specify that the permission be granted (`grant`), denied (`deny`), or user-configurable (`default`). In the caes of `grant` and `deny`, the permission set is no longer user-configurable; if you view the permission in the Settings app on the device, you will see that it can't be modified. The default behavior is to `grant` permission(s).
+
+#### INFLATE
+
+```bash
+INFLATE <archive-path> <target-path>
+```
+
+Inflates the ZIP archive found at `archive-path` to `target-path` folder.
+
+#### INSTALL
+
+```bash
+INSTALL <apk-path>
+```
+
+Installs an application given the path to the containing APK.
+
+#### LAUNCH
+
+```bash
+LAUNCH <package-name>
+```
+
+Starts the launching intent given an application `package-name`.
+
+#### SHELL
+
+```bash
+SHELL <command-with-arguments>
+```
+
+Runs an arbitrary shell command, similarly to the `ADB shell` command.
+
+#### UNINSTALL
+
+```bash
+UNINSTALL <package-name>
+```
+
+Uninstalls a previously installed application given its `package-name`.
+
+#### UPDATE
+
+```bash
+UPDATE <ota-path> <reset-type> <force-update>
+```
+
+Installs a firmware update from an OTA package.
+
+#### WAIT
+
+```bash
+WAIT <milliseconds>
+```
+
+Suspend the script execution for `milliseconds` milliseconds.
 
 ## Example usage
 
