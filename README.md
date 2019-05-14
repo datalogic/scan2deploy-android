@@ -10,18 +10,38 @@
 
 It's worth noticing that the application is *not* a resident service. The above-mentioned actions are performed as long as `Scan2Deploy` is active and in use.
 
-## Using the latest Scan2Deploy
+## Enable Scan2Deploy
 
-Scan2Deploy is pre-installed on Android devices. However, if you want to use the latest version instead, you can create a custom Android Enterprise enrollment barcode that pulls a new version from Github (or another location of your choosing). The list of valid fields you can choose from are [documented here](https://developers.google.com/android/work/play/emm-api/prov-devices#create_a_qr_code).  A sample configuration and pre-generated barcode are provided below.
+Scan2Deploy acts as an Android Enterprise [Device Policy Cotroller (DPC)](https://developer.android.com/work/dpc/build-dpc), running in [device owner mode](https://developers.google.com/android/work/play/emm-api/prov-devices#modes_of_operation). This allows Scan2Deploy to configure many protected device settings that would otherwise not be possible. Any DPC app that acts as a device owner must be configured to do so during device setup. By scanning a QR code at the first page of the Android Setup Wizard ("Hi There! page) on a new or factory-reset device, Scan2Deploy is configured as device owner. There are 2 types of QR codes that are supported:
+
+* [Android Enterprise provisiong QR code](#Android-Enterprise-provisioning-QR-code)
+* [Scan2Deploy QR Code](#creating-scan2deploy-files)
+
+### Android Enterprise provisioning QR code
+
+Scan the following QR code at the `Hi There!` page to enroll `Scan2Deploy` as device owner:
+
+![Latest Version](media/scan2deploy-default.gif)
+
+**Note:** When [generating Scan2Deploy QR codes](#barcode-generation), add `"enroll": true` in your `"layout"` section to cause this same QR code to be displayed in the upper right-hand corner of the page created.
+
+```json
+    "layout": {
+        "enroll": true
+    },
+
+```
+
+#### Install a new version of Scan2Deploy
+
+Scan2Deploy is pre-installed on Datalogic Android devices, however, if you want to use the latest version instead, you can create a custom Android Enterprise enrollment barcode that pulls a new version from Github (or another location of your choosing). The list of valid fields you can choose from are [documented here](https://developers.google.com/android/work/play/emm-api/prov-devices#create_a_qr_code).  A sample configuration and pre-generated barcode are provided below.
 
 There are several tools you can use to encode your JSON data into a QR code. A few options are provided below.
 
 * [qrencode](https://fukuchi.org/works/qrencode/index.html.en) - Linux command line utility. Example usage: `qrencode -o s2dupdate.png < s2dupdate.json`
 * [QR Code Generator](https://kazuhikoarase.github.io/qrcode-generator/js/demo/) - online tool suitable for copy-paste of JSON data.
 
-### Installing the latest version of Scan2Deploy
-
-#### JSON (Latest version)
+##### Latest version
 
 ```json
 {
@@ -33,15 +53,11 @@ There are several tools you can use to encode your JSON data into a QR code. A f
 }
 ```
 
-#### QR Code (Latest version)
+![Latest Version](media/scan2deploy-master.gif)
 
-![Scan2Deploy v1.9](media/scan2deploy-master.gif)
+##### Version 1.9
 
-### Installing a specific version of Scan2Deploy
-
-You can also download a specific release of Scan2Deploy. For example, here is the process for using version `1.9`:
-
-#### JSON (Version 1.9)
+You can also download a specific release of Scan2Deploy. For example, here is the code for using version `1.9`:
 
 ```json
 {
@@ -52,8 +68,6 @@ You can also download a specific release of Scan2Deploy. For example, here is th
     "android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION": "https://github.com/datalogic/scan2deploy-android/raw/v1.9/Scan2Deploy.apk"
 }
 ```
-
-#### QR Code (Version 1.9)
 
 ![Scan2Deploy v1.9](media/scan2deploy1-9.gif)
 
