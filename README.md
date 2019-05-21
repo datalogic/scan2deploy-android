@@ -127,6 +127,38 @@ A PDF page will open up in your default PDF viewer, ready for you to print, save
 
 ![Scan2Deploy button](./media/image83.png)
 
+## Third-party Integration
+
+The application can be either controller by the user, or programmatically controlled in un-manned manner. This can be achieved by calling the launch intent for the `com.datalogic.android.scan2deploy` package and passing the encoded data representing the configuration to be applied.
+
+```java
+Context context = ...; // Android context to be used (e.g. the current activity one)
+String data = ...; // Encoded Scan2Deploy configuration
+PackageManager packageManager = context.getPackageManager();
+Intent launchIntent = packageManager.getLaunchIntentForPackage("com.datalogic.android.scan2deploy");
+launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+launchIntent.putExtra("data", data);
+context.startActivity(launchIntent);
+```
+
+To obtain the encoded configuration data, the `dl_config.exe` program need to be called with the `--encodeonly=true` flag. In this case, obviously, the output filename is not required. An example output in this case is the following:
+
+```console
+> dl_config.exe lock-test.json --encodeonly=true
+Datalogic Staging Configurator (ver 1.6.0)
+Copyright (c) 2016-2018 by Datalogic MCSA S.r.l.
+======================================================================
+Loading file 'lock-test.json'
+Processing data
+-----BEGIN ENCODED DATA-----
+Bm9uiYeZ/NWOnA0ZtIrgLMe1iTFLmjusB6P7S4z/lVZ7LFk1d++YM73GqVnqsT9dmxEEuWfR9My93fUA2tUcEv+jxlGNjljHQpXt96BvbVR8bokir3SsXTnFU3qTDeZznLs3PFh+O3n59luLWVNR3c2mFJF5vaGmLue6xHi3bwJgrZOKzs3/bpibCqeNBLcHa/zQRCPQw4=
+-----END ENCODED DATA-----
+```
+
+The data string to be passed is the ASCII armored sequence (header and trailer included).
+
+As a sidenote, when launched from intent it could be beneficial to specify the global action for the application in order to (for example) automatically close it when the settings have been applied.
+
 ## Examples
 
 ### Detailed
