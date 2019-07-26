@@ -1,4 +1,4 @@
-# scan2deploy-android
+# Scan2Deploy Android
 
 `Scan2Deploy` is an application devoted to the initial staging of Android devices by reading a barcode sequence. Depending on the content of the staging barcodes `Scan2Deploy` will, in this order:
 
