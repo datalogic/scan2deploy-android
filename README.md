@@ -34,14 +34,16 @@ Scan the following QR code at the `Hi There!` page to enroll `Scan2Deploy` as de
 
 #### Install a new version of Scan2Deploy
 
-Scan2Deploy is pre-installed on Datalogic Android devices, however, if you want to use the latest version instead, you can create a custom Android Enterprise enrollment barcode that pulls a new version from Github (or another location of your choosing). The list of valid fields you can choose from are [documented here](https://developers.google.com/android/work/play/emm-api/prov-devices#create_a_qr_code).  A sample configuration and pre-generated barcode are provided below.
+Scan2Deploy is pre-installed on Datalogic Android devices, however, if you want to use an updated version instead, you can create a custom Android Enterprise enrollment barcode that pulls a new version from Github (or another location of your choosing). The list of valid fields you can choose from are [documented here](https://developers.google.com/android/work/play/emm-api/prov-devices#create_a_qr_code).  A sample configuration and pre-generated barcode are provided below.
 
 There are several tools you can use to encode your JSON data into a QR code. A few options are provided below.
 
 * [qrencode](https://fukuchi.org/works/qrencode/index.html.en) - Linux command line utility. Example usage: `qrencode -o s2dupdate.png < s2dupdate.json`
 * [QR Code Generator](https://kazuhikoarase.github.io/qrcode-generator/js/demo/) - online tool suitable for copy-paste of JSON data.
 
-##### Latest version
+##### Version 1.11
+
+The JSON and associated barcode for version `1.11` are provided below:
 
 ```json
 {
@@ -49,27 +51,11 @@ There are several tools you can use to encode your JSON data into a QR code. A f
     "android.app.extra.PROVISIONING_LEAVE_ALL_SYSTEM_APPS_ENABLED": true,
     "android.app.extra.PROVISIONING_SKIP_ENCRYPTION": true,
     "android.app.extra.PROVISIONING_DEVICE_ADMIN_SIGNATURE_CHECKSUM": "6CG8ls-pzlKcJNeoZtAC-neobD_ypZCI853n_TBGEHI=",
-    "android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION": "https://github.com/datalogic/scan2deploy-android/raw/master/Scan2Deploy.apk"
+"android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION": "https://github.com/datalogic/scan2deploy-android/releases/download/v1.11/Scan2Deploy.apk"
 }
 ```
 
-![Latest Version](media/scan2deploy-master.gif)
-
-##### Version 1.9
-
-You can also download a specific release of Scan2Deploy. For example, here is the code for using version `1.9`:
-
-```json
-{
-    "android.app.extra.PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME": "com.datalogic.scan2deploy/com.datalogic.scan2deploy.DeviceOwnerReceiver",
-    "android.app.extra.PROVISIONING_LEAVE_ALL_SYSTEM_APPS_ENABLED": true,
-    "android.app.extra.PROVISIONING_SKIP_ENCRYPTION": true,
-    "android.app.extra.PROVISIONING_DEVICE_ADMIN_SIGNATURE_CHECKSUM": "6CG8ls-pzlKcJNeoZtAC-neobD_ypZCI853n_TBGEHI=",
-    "android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION": "https://github.com/datalogic/scan2deploy-android/raw/v1.9/Scan2Deploy.apk"
-}
-```
-
-![Scan2Deploy v1.9](media/scan2deploy1-9.gif)
+![Scan2Deploy v1.11](media/scan2deploy1-11.png)
 
 ## Creating Scan2Deploy files
 
